@@ -89,6 +89,1256 @@
   },
   {
     "type": "Rule",
+    "name": "RuleFnExpression",
+    "orgText": "",
+    "definition": [
+      {
+        "type": "NonTerminal",
+        "name": "RuleFnAddExpr",
+        "idx": 0
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "RuleFnAddExpr",
+    "orgText": "",
+    "definition": [
+      {
+        "type": "NonTerminal",
+        "name": "RuleFnMultiplicationExpr",
+        "idx": 0
+      },
+      {
+        "type": "Repetition",
+        "idx": 0,
+        "definition": [
+          {
+            "type": "NonTerminal",
+            "name": "RuleAddOperator",
+            "idx": 0
+          },
+          {
+            "type": "NonTerminal",
+            "name": "RuleFnMultiplicationExpr",
+            "idx": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "RuleFnMultiplicationExpr",
+    "orgText": "",
+    "definition": [
+      {
+        "type": "NonTerminal",
+        "name": "RuleFnAtomicExpr",
+        "idx": 0
+      },
+      {
+        "type": "Repetition",
+        "idx": 0,
+        "definition": [
+          {
+            "type": "NonTerminal",
+            "name": "RuleMultiplcationOperator",
+            "idx": 0
+          },
+          {
+            "type": "NonTerminal",
+            "name": "RuleFnAtomicExpr",
+            "idx": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "RuleFnAtomicExpr",
+    "orgText": "",
+    "definition": [
+      {
+        "type": "Alternation",
+        "idx": 0,
+        "definition": [
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "NonTerminal",
+                "name": "RuleFnParenthesisExpr",
+                "idx": 0
+              }
+            ]
+          },
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "NonTerminal",
+                "name": "RuleNumber",
+                "idx": 0
+              }
+            ]
+          },
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "NonTerminal",
+                "name": "RuleFnPowExpr",
+                "idx": 0
+              }
+            ]
+          },
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "NonTerminal",
+                "name": "RuleFnCall",
+                "idx": 0
+              }
+            ]
+          },
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "NonTerminal",
+                "name": "RuleFnVariable",
+                "idx": 0
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "RuleFnParenthesisExpr",
+    "orgText": "",
+    "definition": [
+      {
+        "type": "Terminal",
+        "name": "LBracket",
+        "label": "(",
+        "idx": 1,
+        "pattern": "\\("
+      },
+      {
+        "type": "NonTerminal",
+        "name": "RuleFnAddExpr",
+        "idx": 0
+      },
+      {
+        "type": "Terminal",
+        "name": "LBracket",
+        "label": ")",
+        "idx": 0,
+        "pattern": "\\)"
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "RuleFnPowExpr",
+    "orgText": "",
+    "definition": [
+      {
+        "type": "Terminal",
+        "name": "pow",
+        "label": "pow",
+        "idx": 0,
+        "pattern": "pow"
+      },
+      {
+        "type": "Terminal",
+        "name": "LBracket",
+        "label": "(",
+        "idx": 1,
+        "pattern": "\\("
+      },
+      {
+        "type": "NonTerminal",
+        "name": "RuleFnAddExpr",
+        "idx": 0
+      },
+      {
+        "type": "Terminal",
+        "name": "Comma",
+        "label": ",",
+        "idx": 0,
+        "pattern": ","
+      },
+      {
+        "type": "NonTerminal",
+        "name": "RuleFnAddExpr",
+        "idx": 2
+      },
+      {
+        "type": "Terminal",
+        "name": "LBracket",
+        "label": ")",
+        "idx": 0,
+        "pattern": "\\)"
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "RuleFnCall",
+    "orgText": "",
+    "definition": [
+      {
+        "type": "NonTerminal",
+        "name": "RuleFnCallVariable",
+        "idx": 0
+      },
+      {
+        "type": "Terminal",
+        "name": "LBracket",
+        "label": "(",
+        "idx": 1,
+        "pattern": "\\("
+      },
+      {
+        "type": "RepetitionWithSeparator",
+        "idx": 0,
+        "separator": {
+          "type": "Terminal",
+          "name": "Comma",
+          "label": ",",
+          "idx": 1,
+          "pattern": ","
+        },
+        "definition": [
+          {
+            "type": "NonTerminal",
+            "name": "RuleAssignableValue",
+            "idx": 0
+          }
+        ]
+      },
+      {
+        "type": "Terminal",
+        "name": "LBracket",
+        "label": ")",
+        "idx": 0,
+        "pattern": "\\)"
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "RuleFnCallVariable",
+    "orgText": "",
+    "definition": [
+      {
+        "type": "Alternation",
+        "idx": 0,
+        "definition": [
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "Terminal",
+                "name": "glsl_vec2f",
+                "label": "glsl_vec2f",
+                "idx": 0,
+                "pattern": "vec2f"
+              }
+            ]
+          },
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "Terminal",
+                "name": "glsl_vec3f",
+                "label": "glsl_vec3f",
+                "idx": 0,
+                "pattern": "vec3f"
+              }
+            ]
+          },
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "Terminal",
+                "name": "glsl_vec4f",
+                "label": "glsl_vec4f",
+                "idx": 0,
+                "pattern": "vec4f"
+              }
+            ]
+          },
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "Terminal",
+                "name": "glsl_vec2",
+                "label": "glsl_vec2",
+                "idx": 0,
+                "pattern": "vec2"
+              }
+            ]
+          },
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "Terminal",
+                "name": "glsl_vec3",
+                "label": "glsl_vec3",
+                "idx": 0,
+                "pattern": "vec3"
+              }
+            ]
+          },
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "Terminal",
+                "name": "glsl_vec4",
+                "label": "glsl_vec4",
+                "idx": 0,
+                "pattern": "vec4"
+              }
+            ]
+          },
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "Terminal",
+                "name": "glsl_float",
+                "label": "glsl_float",
+                "idx": 0,
+                "pattern": "float"
+              }
+            ]
+          },
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "Terminal",
+                "name": "glsl_sampler2D",
+                "label": "glsl_sampler2D",
+                "idx": 0,
+                "pattern": "glsl_sampler2D"
+              }
+            ]
+          },
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "Terminal",
+                "name": "Identifier",
+                "label": "Identifier",
+                "idx": 0,
+                "pattern": "[a-zA-z]\\w*"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "RuleFnRelationExpr",
+    "orgText": "",
+    "definition": [
+      {
+        "type": "NonTerminal",
+        "name": "RuleFnAddExpr",
+        "idx": 0
+      },
+      {
+        "type": "NonTerminal",
+        "name": "RuleRelationOperator",
+        "idx": 0
+      },
+      {
+        "type": "NonTerminal",
+        "name": "RuleFnAddExpr",
+        "idx": 1
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "RuleFnVariableDeclaration",
+    "orgText": "",
+    "definition": [
+      {
+        "type": "NonTerminal",
+        "name": "RuleVariableType",
+        "idx": 0
+      },
+      {
+        "type": "Terminal",
+        "name": "Identifier",
+        "label": "Identifier",
+        "idx": 0,
+        "pattern": "[a-zA-z]\\w*"
+      },
+      {
+        "type": "Option",
+        "idx": 1,
+        "definition": [
+          {
+            "type": "Terminal",
+            "name": "Equal",
+            "label": "=",
+            "idx": 0,
+            "pattern": "="
+          },
+          {
+            "type": "NonTerminal",
+            "name": "RuleFnExpression",
+            "idx": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "RuleFnStatement",
+    "orgText": "",
+    "definition": [
+      {
+        "type": "Alternation",
+        "idx": 0,
+        "definition": [
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "NonTerminal",
+                "name": "RuleFnCall",
+                "idx": 0
+              }
+            ]
+          },
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "NonTerminal",
+                "name": "RuleFnReturnStatement",
+                "idx": 0
+              }
+            ]
+          },
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "NonTerminal",
+                "name": "RuleFnVariableDeclaration",
+                "idx": 0
+              }
+            ]
+          },
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "NonTerminal",
+                "name": "RuleFnConditionStatement",
+                "idx": 0
+              }
+            ]
+          },
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "NonTerminal",
+                "name": "RuleFnAssignStatement",
+                "idx": 0
+              }
+            ]
+          },
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "Terminal",
+                "name": "discard",
+                "label": "discard",
+                "idx": 0,
+                "pattern": "discard"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "RuleFnAssignStatement",
+    "orgText": "",
+    "definition": [
+      {
+        "type": "NonTerminal",
+        "name": "RuleFnAssignLO",
+        "idx": 0
+      },
+      {
+        "type": "NonTerminal",
+        "name": "RuleFnAssignmentOperator",
+        "idx": 0
+      },
+      {
+        "type": "NonTerminal",
+        "name": "RuleFnExpression",
+        "idx": 0
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "RuleFnAssignmentOperator",
+    "orgText": "",
+    "definition": [
+      {
+        "type": "Alternation",
+        "idx": 0,
+        "definition": [
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "Terminal",
+                "name": "Equal",
+                "label": "=",
+                "idx": 0,
+                "pattern": "="
+              }
+            ]
+          },
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "Terminal",
+                "name": "MultiEqual",
+                "label": "*=",
+                "idx": 0,
+                "pattern": "\\*="
+              }
+            ]
+          },
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "Terminal",
+                "name": "DivideEqual",
+                "label": "/=",
+                "idx": 0,
+                "pattern": "\\/="
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "RuleFnAssignLO",
+    "orgText": "",
+    "definition": [
+      {
+        "type": "Alternation",
+        "idx": 0,
+        "definition": [
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "Terminal",
+                "name": "gl_Position",
+                "label": "gl_Position",
+                "idx": 0,
+                "pattern": "gl_Position"
+              }
+            ]
+          },
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "Terminal",
+                "name": "gl_FragColor",
+                "label": "gl_FragColor",
+                "idx": 0,
+                "pattern": "gl_FragColor"
+              }
+            ]
+          },
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "NonTerminal",
+                "name": "RuleFnVariable",
+                "idx": 0
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "RuleFnVariable",
+    "orgText": "",
+    "definition": [
+      {
+        "type": "Terminal",
+        "name": "Identifier",
+        "label": "Identifier",
+        "idx": 0,
+        "pattern": "[a-zA-z]\\w*"
+      },
+      {
+        "type": "Repetition",
+        "idx": 0,
+        "definition": [
+          {
+            "type": "Terminal",
+            "name": "Dot",
+            "label": ".",
+            "idx": 0,
+            "pattern": "\\."
+          },
+          {
+            "type": "Terminal",
+            "name": "Identifier",
+            "label": "Identifier",
+            "idx": 1,
+            "pattern": "[a-zA-z]\\w*"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "RuleFnBlockStatement",
+    "orgText": "",
+    "definition": [
+      {
+        "type": "Terminal",
+        "name": "LCurly",
+        "label": "{",
+        "idx": 0,
+        "pattern": "\\{"
+      },
+      {
+        "type": "NonTerminal",
+        "name": "RuleFnBody",
+        "idx": 0
+      },
+      {
+        "type": "Terminal",
+        "name": "RCurly",
+        "label": "}",
+        "idx": 0,
+        "pattern": "\\}"
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "RuleFnConditionStatement",
+    "orgText": "",
+    "definition": [
+      {
+        "type": "Terminal",
+        "name": "if",
+        "label": "if",
+        "idx": 0,
+        "pattern": "if"
+      },
+      {
+        "type": "Terminal",
+        "name": "LBracket",
+        "label": "(",
+        "idx": 1,
+        "pattern": "\\("
+      },
+      {
+        "type": "NonTerminal",
+        "name": "RuleFnRelationExpr",
+        "idx": 0
+      },
+      {
+        "type": "Terminal",
+        "name": "LBracket",
+        "label": ")",
+        "idx": 0,
+        "pattern": "\\)"
+      },
+      {
+        "type": "Option",
+        "idx": 0,
+        "definition": [
+          {
+            "type": "Repetition",
+            "idx": 0,
+            "definition": [
+              {
+                "type": "Terminal",
+                "name": "else",
+                "label": "else",
+                "idx": 0,
+                "pattern": "else"
+              },
+              {
+                "type": "Terminal",
+                "name": "if",
+                "label": "if",
+                "idx": 1,
+                "pattern": "if"
+              },
+              {
+                "type": "NonTerminal",
+                "name": "RuleFnBlockStatement",
+                "idx": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Option",
+        "idx": 1,
+        "definition": [
+          {
+            "type": "Terminal",
+            "name": "else",
+            "label": "else",
+            "idx": 1,
+            "pattern": "else"
+          }
+        ]
+      },
+      {
+        "type": "NonTerminal",
+        "name": "RuleFnBlockStatement",
+        "idx": 1
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "RuleFnReturnStatement",
+    "orgText": "",
+    "definition": [
+      {
+        "type": "Terminal",
+        "name": "return",
+        "label": "return",
+        "idx": 0,
+        "pattern": "return"
+      },
+      {
+        "type": "NonTerminal",
+        "name": "RuleFnReturnVariable",
+        "idx": 0
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "RuleFnReturnVariable",
+    "orgText": "",
+    "definition": [
+      {
+        "type": "Alternation",
+        "idx": 0,
+        "definition": [
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "Terminal",
+                "name": "ValueFloat",
+                "label": "ValueFloat",
+                "idx": 0,
+                "pattern": "-?\\d+\\.\\d+"
+              }
+            ]
+          },
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "Terminal",
+                "name": "ValueInt",
+                "label": "ValueInt",
+                "idx": 0,
+                "pattern": "-?\\d+"
+              }
+            ]
+          },
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "Terminal",
+                "name": "ValueString",
+                "label": "ValueString",
+                "idx": 0,
+                "pattern": "\"(\\w|\\s)*\""
+              }
+            ]
+          },
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "Terminal",
+                "name": "ValueTrue",
+                "label": "ValueTrue",
+                "idx": 0,
+                "pattern": "true"
+              }
+            ]
+          },
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "Terminal",
+                "name": "ValueFalse",
+                "label": "ValueFalse",
+                "idx": 0,
+                "pattern": "false"
+              }
+            ]
+          },
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "NonTerminal",
+                "name": "RuleFnVariable",
+                "idx": 0
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "RuleFnMacro",
+    "orgText": "",
+    "definition": [
+      {
+        "type": "Alternation",
+        "idx": 0,
+        "definition": [
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "NonTerminal",
+                "name": "RuleFnMacroDefine",
+                "idx": 0
+              }
+            ]
+          },
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "NonTerminal",
+                "name": "RuleFnMacroInclude",
+                "idx": 0
+              }
+            ]
+          },
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "NonTerminal",
+                "name": "RuleFnMacroCondition",
+                "idx": 0
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "RuleFnMacroCondition",
+    "orgText": "",
+    "definition": [
+      {
+        "type": "NonTerminal",
+        "name": "RuleFnMacroConditionDeclare",
+        "idx": 0
+      },
+      {
+        "type": "Terminal",
+        "name": "Identifier",
+        "label": "Identifier",
+        "idx": 0,
+        "pattern": "[a-zA-z]\\w*"
+      },
+      {
+        "type": "NonTerminal",
+        "name": "RuleFnBody",
+        "idx": 0
+      },
+      {
+        "type": "Option",
+        "idx": 0,
+        "definition": [
+          {
+            "type": "NonTerminal",
+            "name": "RuleFnMacroConditionBranch",
+            "idx": 0
+          }
+        ]
+      },
+      {
+        "type": "Option",
+        "idx": 1,
+        "definition": [
+          {
+            "type": "NonTerminal",
+            "name": "RuleFnBody",
+            "idx": 1
+          }
+        ]
+      },
+      {
+        "type": "Terminal",
+        "name": "m_endif",
+        "label": "#endif",
+        "idx": 0,
+        "pattern": "#endif"
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "RuleFnMacroConditionBranch",
+    "orgText": "",
+    "definition": [
+      {
+        "type": "NonTerminal",
+        "name": "RuleFnMacroConditionBranchDeclare",
+        "idx": 0
+      },
+      {
+        "type": "NonTerminal",
+        "name": "RuleFnBody",
+        "idx": 0
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "RuleFnMacroConditionBranchDeclare",
+    "orgText": "",
+    "definition": [
+      {
+        "type": "Alternation",
+        "idx": 0,
+        "definition": [
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "Terminal",
+                "name": "m_else",
+                "label": "#else",
+                "idx": 0,
+                "pattern": "#else"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "RuleFnMacroConditionDeclare",
+    "orgText": "",
+    "definition": [
+      {
+        "type": "Alternation",
+        "idx": 0,
+        "definition": [
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "Terminal",
+                "name": "m_ifdef",
+                "label": "#ifdef",
+                "idx": 0,
+                "pattern": "#ifdef"
+              }
+            ]
+          },
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "Terminal",
+                "name": "m_ifndef",
+                "label": "#ifndef",
+                "idx": 0,
+                "pattern": "#ifndef"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "RuleFnMacroDefine",
+    "orgText": "",
+    "definition": [
+      {
+        "type": "Terminal",
+        "name": "m_define",
+        "label": "#define",
+        "idx": 0,
+        "pattern": "#define"
+      },
+      {
+        "type": "Terminal",
+        "name": "Identifier",
+        "label": "Identifier",
+        "idx": 0,
+        "pattern": "[a-zA-z]\\w*"
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "RuleFnMacroInclude",
+    "orgText": "",
+    "definition": [
+      {
+        "type": "Terminal",
+        "name": "m_include",
+        "label": "#include",
+        "idx": 0,
+        "pattern": "#include"
+      },
+      {
+        "type": "Terminal",
+        "name": "ValueString",
+        "label": "ValueString",
+        "idx": 0,
+        "pattern": "\"(\\w|\\s)*\""
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "RuleFn",
+    "orgText": "",
+    "definition": [
+      {
+        "type": "NonTerminal",
+        "name": "RuleFnReturnType",
+        "idx": 0
+      },
+      {
+        "type": "Terminal",
+        "name": "Identifier",
+        "label": "Identifier",
+        "idx": 1,
+        "pattern": "[a-zA-z]\\w*"
+      },
+      {
+        "type": "Terminal",
+        "name": "LBracket",
+        "label": "(",
+        "idx": 1,
+        "pattern": "\\("
+      },
+      {
+        "type": "RepetitionWithSeparator",
+        "idx": 0,
+        "separator": {
+          "type": "Terminal",
+          "name": "Comma",
+          "label": ",",
+          "idx": 1,
+          "pattern": ","
+        },
+        "definition": [
+          {
+            "type": "NonTerminal",
+            "name": "RuleFnArg",
+            "idx": 0
+          }
+        ]
+      },
+      {
+        "type": "Terminal",
+        "name": "LBracket",
+        "label": ")",
+        "idx": 0,
+        "pattern": "\\)"
+      },
+      {
+        "type": "Terminal",
+        "name": "LCurly",
+        "label": "{",
+        "idx": 0,
+        "pattern": "\\{"
+      },
+      {
+        "type": "NonTerminal",
+        "name": "RuleFnBody",
+        "idx": 0
+      },
+      {
+        "type": "Terminal",
+        "name": "RCurly",
+        "label": "}",
+        "idx": 0,
+        "pattern": "\\}"
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "RuleFnArg",
+    "orgText": "",
+    "definition": [
+      {
+        "type": "NonTerminal",
+        "name": "RuleVariableType",
+        "idx": 0
+      },
+      {
+        "type": "Terminal",
+        "name": "Identifier",
+        "label": "Identifier",
+        "idx": 2,
+        "pattern": "[a-zA-z]\\w*"
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "RuleFnReturnType",
+    "orgText": "",
+    "definition": [
+      {
+        "type": "Alternation",
+        "idx": 0,
+        "definition": [
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "NonTerminal",
+                "name": "RuleVariableType",
+                "idx": 0
+              }
+            ]
+          },
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "Terminal",
+                "name": "void",
+                "label": "void",
+                "idx": 0,
+                "pattern": "void"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "RuleFnBody",
+    "orgText": "",
+    "definition": [
+      {
+        "type": "Repetition",
+        "idx": 0,
+        "definition": [
+          {
+            "type": "Alternation",
+            "idx": 0,
+            "definition": [
+              {
+                "type": "Alternative",
+                "definition": [
+                  {
+                    "type": "NonTerminal",
+                    "name": "RuleFnMacro",
+                    "idx": 0
+                  }
+                ]
+              },
+              {
+                "type": "Alternative",
+                "definition": [
+                  {
+                    "type": "NonTerminal",
+                    "name": "RuleFnStatement",
+                    "idx": 0
+                  },
+                  {
+                    "type": "Terminal",
+                    "name": "Semicolon",
+                    "label": ";",
+                    "idx": 0,
+                    "pattern": ";"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "Rule",
     "name": "RuleSubShader",
     "orgText": "",
     "definition": [
@@ -1417,11 +2667,9 @@
             "type": "Alternative",
             "definition": [
               {
-                "type": "Terminal",
-                "name": "Identifier",
-                "label": "Identifier",
-                "idx": 0,
-                "pattern": "[a-zA-z]\\w*"
+                "type": "NonTerminal",
+                "name": "RuleFnVariable",
+                "idx": 0
               }
             ]
           }
@@ -1647,975 +2895,6 @@
                 "pattern": "\\<"
               }
             ]
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "type": "Rule",
-    "name": "RuleFnExpression",
-    "orgText": "",
-    "definition": [
-      {
-        "type": "NonTerminal",
-        "name": "RuleFnAddExpr",
-        "idx": 0
-      }
-    ]
-  },
-  {
-    "type": "Rule",
-    "name": "RuleFnAddExpr",
-    "orgText": "",
-    "definition": [
-      {
-        "type": "NonTerminal",
-        "name": "RuleFnMultiplicationExpr",
-        "idx": 0
-      },
-      {
-        "type": "Repetition",
-        "idx": 0,
-        "definition": [
-          {
-            "type": "NonTerminal",
-            "name": "RuleAddOperator",
-            "idx": 0
-          },
-          {
-            "type": "NonTerminal",
-            "name": "RuleFnMultiplicationExpr",
-            "idx": 2
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "type": "Rule",
-    "name": "RuleFnMultiplicationExpr",
-    "orgText": "",
-    "definition": [
-      {
-        "type": "NonTerminal",
-        "name": "RuleFnAtomicExpr",
-        "idx": 0
-      },
-      {
-        "type": "Repetition",
-        "idx": 0,
-        "definition": [
-          {
-            "type": "NonTerminal",
-            "name": "RuleMultiplcationOperator",
-            "idx": 0
-          },
-          {
-            "type": "NonTerminal",
-            "name": "RuleFnAtomicExpr",
-            "idx": 2
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "type": "Rule",
-    "name": "RuleFnAtomicExpr",
-    "orgText": "",
-    "definition": [
-      {
-        "type": "Alternation",
-        "idx": 0,
-        "definition": [
-          {
-            "type": "Alternative",
-            "definition": [
-              {
-                "type": "NonTerminal",
-                "name": "RuleFnParenthesisExpr",
-                "idx": 0
-              }
-            ]
-          },
-          {
-            "type": "Alternative",
-            "definition": [
-              {
-                "type": "NonTerminal",
-                "name": "RuleNumber",
-                "idx": 0
-              }
-            ]
-          },
-          {
-            "type": "Alternative",
-            "definition": [
-              {
-                "type": "NonTerminal",
-                "name": "RuleFnPowExpr",
-                "idx": 0
-              }
-            ]
-          },
-          {
-            "type": "Alternative",
-            "definition": [
-              {
-                "type": "NonTerminal",
-                "name": "RuleFnCall",
-                "idx": 0
-              }
-            ]
-          },
-          {
-            "type": "Alternative",
-            "definition": [
-              {
-                "type": "Terminal",
-                "name": "Identifier",
-                "label": "Identifier",
-                "idx": 0,
-                "pattern": "[a-zA-z]\\w*"
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "type": "Rule",
-    "name": "RuleFnParenthesisExpr",
-    "orgText": "",
-    "definition": [
-      {
-        "type": "Terminal",
-        "name": "LBracket",
-        "label": "(",
-        "idx": 1,
-        "pattern": "\\("
-      },
-      {
-        "type": "NonTerminal",
-        "name": "RuleFnAddExpr",
-        "idx": 0
-      },
-      {
-        "type": "Terminal",
-        "name": "LBracket",
-        "label": ")",
-        "idx": 0,
-        "pattern": "\\)"
-      }
-    ]
-  },
-  {
-    "type": "Rule",
-    "name": "RuleFnPowExpr",
-    "orgText": "",
-    "definition": [
-      {
-        "type": "Terminal",
-        "name": "pow",
-        "label": "pow",
-        "idx": 0,
-        "pattern": "pow"
-      },
-      {
-        "type": "Terminal",
-        "name": "LBracket",
-        "label": "(",
-        "idx": 1,
-        "pattern": "\\("
-      },
-      {
-        "type": "NonTerminal",
-        "name": "RuleFnAddExpr",
-        "idx": 0
-      },
-      {
-        "type": "Terminal",
-        "name": "Comma",
-        "label": ",",
-        "idx": 0,
-        "pattern": ","
-      },
-      {
-        "type": "NonTerminal",
-        "name": "RuleFnAddExpr",
-        "idx": 2
-      },
-      {
-        "type": "Terminal",
-        "name": "LBracket",
-        "label": ")",
-        "idx": 0,
-        "pattern": "\\)"
-      }
-    ]
-  },
-  {
-    "type": "Rule",
-    "name": "RuleFnCall",
-    "orgText": "",
-    "definition": [
-      {
-        "type": "NonTerminal",
-        "name": "RuleFnCallVariable",
-        "idx": 0
-      },
-      {
-        "type": "Terminal",
-        "name": "LBracket",
-        "label": "(",
-        "idx": 1,
-        "pattern": "\\("
-      },
-      {
-        "type": "RepetitionWithSeparator",
-        "idx": 0,
-        "separator": {
-          "type": "Terminal",
-          "name": "Comma",
-          "label": ",",
-          "idx": 1,
-          "pattern": ","
-        },
-        "definition": [
-          {
-            "type": "NonTerminal",
-            "name": "RuleAssignableValue",
-            "idx": 0
-          }
-        ]
-      },
-      {
-        "type": "Terminal",
-        "name": "LBracket",
-        "label": ")",
-        "idx": 0,
-        "pattern": "\\)"
-      }
-    ]
-  },
-  {
-    "type": "Rule",
-    "name": "RuleFnCallVariable",
-    "orgText": "",
-    "definition": [
-      {
-        "type": "Alternation",
-        "idx": 0,
-        "definition": [
-          {
-            "type": "Alternative",
-            "definition": [
-              {
-                "type": "Terminal",
-                "name": "glsl_vec2f",
-                "label": "glsl_vec2f",
-                "idx": 0,
-                "pattern": "vec2f"
-              }
-            ]
-          },
-          {
-            "type": "Alternative",
-            "definition": [
-              {
-                "type": "Terminal",
-                "name": "glsl_vec3f",
-                "label": "glsl_vec3f",
-                "idx": 0,
-                "pattern": "vec3f"
-              }
-            ]
-          },
-          {
-            "type": "Alternative",
-            "definition": [
-              {
-                "type": "Terminal",
-                "name": "glsl_vec4f",
-                "label": "glsl_vec4f",
-                "idx": 0,
-                "pattern": "vec4f"
-              }
-            ]
-          },
-          {
-            "type": "Alternative",
-            "definition": [
-              {
-                "type": "Terminal",
-                "name": "glsl_vec2",
-                "label": "glsl_vec2",
-                "idx": 0,
-                "pattern": "vec2"
-              }
-            ]
-          },
-          {
-            "type": "Alternative",
-            "definition": [
-              {
-                "type": "Terminal",
-                "name": "glsl_vec3",
-                "label": "glsl_vec3",
-                "idx": 0,
-                "pattern": "vec3"
-              }
-            ]
-          },
-          {
-            "type": "Alternative",
-            "definition": [
-              {
-                "type": "Terminal",
-                "name": "glsl_vec4",
-                "label": "glsl_vec4",
-                "idx": 0,
-                "pattern": "vec4"
-              }
-            ]
-          },
-          {
-            "type": "Alternative",
-            "definition": [
-              {
-                "type": "Terminal",
-                "name": "glsl_float",
-                "label": "glsl_float",
-                "idx": 0,
-                "pattern": "float"
-              }
-            ]
-          },
-          {
-            "type": "Alternative",
-            "definition": [
-              {
-                "type": "Terminal",
-                "name": "glsl_sampler2D",
-                "label": "glsl_sampler2D",
-                "idx": 0,
-                "pattern": "glsl_sampler2D"
-              }
-            ]
-          },
-          {
-            "type": "Alternative",
-            "definition": [
-              {
-                "type": "Terminal",
-                "name": "Identifier",
-                "label": "Identifier",
-                "idx": 0,
-                "pattern": "[a-zA-z]\\w*"
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "type": "Rule",
-    "name": "RuleFnRelationExpr",
-    "orgText": "",
-    "definition": [
-      {
-        "type": "NonTerminal",
-        "name": "RuleFnAddExpr",
-        "idx": 0
-      },
-      {
-        "type": "NonTerminal",
-        "name": "RuleRelationOperator",
-        "idx": 0
-      },
-      {
-        "type": "NonTerminal",
-        "name": "RuleFnAddExpr",
-        "idx": 1
-      }
-    ]
-  },
-  {
-    "type": "Rule",
-    "name": "RuleFnVariableDeclaration",
-    "orgText": "",
-    "definition": [
-      {
-        "type": "NonTerminal",
-        "name": "RuleVariableType",
-        "idx": 0
-      },
-      {
-        "type": "Terminal",
-        "name": "Identifier",
-        "label": "Identifier",
-        "idx": 0,
-        "pattern": "[a-zA-z]\\w*"
-      },
-      {
-        "type": "Option",
-        "idx": 1,
-        "definition": [
-          {
-            "type": "Terminal",
-            "name": "Equal",
-            "label": "=",
-            "idx": 0,
-            "pattern": "="
-          },
-          {
-            "type": "NonTerminal",
-            "name": "RuleFnExpression",
-            "idx": 0
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "type": "Rule",
-    "name": "RuleFnStatement",
-    "orgText": "",
-    "definition": [
-      {
-        "type": "Alternation",
-        "idx": 0,
-        "definition": [
-          {
-            "type": "Alternative",
-            "definition": [
-              {
-                "type": "NonTerminal",
-                "name": "RuleFnCall",
-                "idx": 0
-              }
-            ]
-          },
-          {
-            "type": "Alternative",
-            "definition": [
-              {
-                "type": "NonTerminal",
-                "name": "RuleFnReturnStatement",
-                "idx": 0
-              }
-            ]
-          },
-          {
-            "type": "Alternative",
-            "definition": [
-              {
-                "type": "NonTerminal",
-                "name": "RuleFnVariableDeclaration",
-                "idx": 0
-              }
-            ]
-          },
-          {
-            "type": "Alternative",
-            "definition": [
-              {
-                "type": "NonTerminal",
-                "name": "RuleFnConditionStatement",
-                "idx": 0
-              }
-            ]
-          },
-          {
-            "type": "Alternative",
-            "definition": [
-              {
-                "type": "NonTerminal",
-                "name": "RuleFnAssignStatement",
-                "idx": 0
-              }
-            ]
-          },
-          {
-            "type": "Alternative",
-            "definition": [
-              {
-                "type": "Terminal",
-                "name": "discard",
-                "label": "discard",
-                "idx": 0,
-                "pattern": "discard"
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "type": "Rule",
-    "name": "RuleFnAssignStatement",
-    "orgText": "",
-    "definition": [
-      {
-        "type": "NonTerminal",
-        "name": "RuleFnAssignLO",
-        "idx": 0
-      },
-      {
-        "type": "Terminal",
-        "name": "Equal",
-        "label": "=",
-        "idx": 0,
-        "pattern": "="
-      },
-      {
-        "type": "NonTerminal",
-        "name": "RuleFnExpression",
-        "idx": 0
-      }
-    ]
-  },
-  {
-    "type": "Rule",
-    "name": "RuleFnAssignLO",
-    "orgText": "",
-    "definition": [
-      {
-        "type": "Alternation",
-        "idx": 0,
-        "definition": [
-          {
-            "type": "Alternative",
-            "definition": [
-              {
-                "type": "Terminal",
-                "name": "gl_Position",
-                "label": "gl_Position",
-                "idx": 0,
-                "pattern": "gl_Position"
-              }
-            ]
-          },
-          {
-            "type": "Alternative",
-            "definition": [
-              {
-                "type": "Terminal",
-                "name": "gl_FragColor",
-                "label": "gl_FragColor",
-                "idx": 0,
-                "pattern": "gl_FragColor"
-              }
-            ]
-          },
-          {
-            "type": "Alternative",
-            "definition": [
-              {
-                "type": "NonTerminal",
-                "name": "RuleFnVariable",
-                "idx": 0
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "type": "Rule",
-    "name": "RuleFnVariable",
-    "orgText": "",
-    "definition": [
-      {
-        "type": "Terminal",
-        "name": "Identifier",
-        "label": "Identifier",
-        "idx": 0,
-        "pattern": "[a-zA-z]\\w*"
-      },
-      {
-        "type": "Repetition",
-        "idx": 0,
-        "definition": [
-          {
-            "type": "Terminal",
-            "name": "Dot",
-            "label": ".",
-            "idx": 0,
-            "pattern": "\\."
-          },
-          {
-            "type": "Terminal",
-            "name": "Identifier",
-            "label": "Identifier",
-            "idx": 1,
-            "pattern": "[a-zA-z]\\w*"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "type": "Rule",
-    "name": "RuleFnBlockStatement",
-    "orgText": "",
-    "definition": [
-      {
-        "type": "Terminal",
-        "name": "LCurly",
-        "label": "{",
-        "idx": 0,
-        "pattern": "\\{"
-      },
-      {
-        "type": "NonTerminal",
-        "name": "RuleFnBody",
-        "idx": 0
-      },
-      {
-        "type": "Terminal",
-        "name": "RCurly",
-        "label": "}",
-        "idx": 0,
-        "pattern": "\\}"
-      }
-    ]
-  },
-  {
-    "type": "Rule",
-    "name": "RuleFnConditionStatement",
-    "orgText": "",
-    "definition": [
-      {
-        "type": "Terminal",
-        "name": "if",
-        "label": "if",
-        "idx": 0,
-        "pattern": "if"
-      },
-      {
-        "type": "Terminal",
-        "name": "LBracket",
-        "label": "(",
-        "idx": 1,
-        "pattern": "\\("
-      },
-      {
-        "type": "NonTerminal",
-        "name": "RuleFnRelationExpr",
-        "idx": 0
-      },
-      {
-        "type": "Terminal",
-        "name": "LBracket",
-        "label": ")",
-        "idx": 0,
-        "pattern": "\\)"
-      },
-      {
-        "type": "Option",
-        "idx": 0,
-        "definition": [
-          {
-            "type": "Repetition",
-            "idx": 0,
-            "definition": [
-              {
-                "type": "Terminal",
-                "name": "else",
-                "label": "else",
-                "idx": 0,
-                "pattern": "else"
-              },
-              {
-                "type": "Terminal",
-                "name": "if",
-                "label": "if",
-                "idx": 1,
-                "pattern": "if"
-              },
-              {
-                "type": "NonTerminal",
-                "name": "RuleFnBlockStatement",
-                "idx": 0
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "type": "Option",
-        "idx": 1,
-        "definition": [
-          {
-            "type": "Terminal",
-            "name": "else",
-            "label": "else",
-            "idx": 1,
-            "pattern": "else"
-          }
-        ]
-      },
-      {
-        "type": "NonTerminal",
-        "name": "RuleFnBlockStatement",
-        "idx": 1
-      }
-    ]
-  },
-  {
-    "type": "Rule",
-    "name": "RuleFnReturnStatement",
-    "orgText": "",
-    "definition": [
-      {
-        "type": "Terminal",
-        "name": "return",
-        "label": "return",
-        "idx": 0,
-        "pattern": "return"
-      },
-      {
-        "type": "NonTerminal",
-        "name": "RuleFnReturnVariable",
-        "idx": 0
-      }
-    ]
-  },
-  {
-    "type": "Rule",
-    "name": "RuleFnReturnVariable",
-    "orgText": "",
-    "definition": [
-      {
-        "type": "Alternation",
-        "idx": 0,
-        "definition": [
-          {
-            "type": "Alternative",
-            "definition": [
-              {
-                "type": "Terminal",
-                "name": "ValueFloat",
-                "label": "ValueFloat",
-                "idx": 0,
-                "pattern": "-?\\d+\\.\\d+"
-              }
-            ]
-          },
-          {
-            "type": "Alternative",
-            "definition": [
-              {
-                "type": "Terminal",
-                "name": "ValueInt",
-                "label": "ValueInt",
-                "idx": 0,
-                "pattern": "-?\\d+"
-              }
-            ]
-          },
-          {
-            "type": "Alternative",
-            "definition": [
-              {
-                "type": "Terminal",
-                "name": "ValueString",
-                "label": "ValueString",
-                "idx": 0,
-                "pattern": "\"(\\w|\\s)*\""
-              }
-            ]
-          },
-          {
-            "type": "Alternative",
-            "definition": [
-              {
-                "type": "Terminal",
-                "name": "ValueTrue",
-                "label": "ValueTrue",
-                "idx": 0,
-                "pattern": "true"
-              }
-            ]
-          },
-          {
-            "type": "Alternative",
-            "definition": [
-              {
-                "type": "Terminal",
-                "name": "ValueFalse",
-                "label": "ValueFalse",
-                "idx": 0,
-                "pattern": "false"
-              }
-            ]
-          },
-          {
-            "type": "Alternative",
-            "definition": [
-              {
-                "type": "Terminal",
-                "name": "Identifier",
-                "label": "Identifier",
-                "idx": 0,
-                "pattern": "[a-zA-z]\\w*"
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "type": "Rule",
-    "name": "RuleFn",
-    "orgText": "",
-    "definition": [
-      {
-        "type": "NonTerminal",
-        "name": "RuleFnReturnType",
-        "idx": 0
-      },
-      {
-        "type": "Terminal",
-        "name": "Identifier",
-        "label": "Identifier",
-        "idx": 1,
-        "pattern": "[a-zA-z]\\w*"
-      },
-      {
-        "type": "Terminal",
-        "name": "LBracket",
-        "label": "(",
-        "idx": 1,
-        "pattern": "\\("
-      },
-      {
-        "type": "RepetitionWithSeparator",
-        "idx": 0,
-        "separator": {
-          "type": "Terminal",
-          "name": "Comma",
-          "label": ",",
-          "idx": 1,
-          "pattern": ","
-        },
-        "definition": [
-          {
-            "type": "NonTerminal",
-            "name": "RuleFnArg",
-            "idx": 0
-          }
-        ]
-      },
-      {
-        "type": "Terminal",
-        "name": "LBracket",
-        "label": ")",
-        "idx": 0,
-        "pattern": "\\)"
-      },
-      {
-        "type": "Terminal",
-        "name": "LCurly",
-        "label": "{",
-        "idx": 0,
-        "pattern": "\\{"
-      },
-      {
-        "type": "NonTerminal",
-        "name": "RuleFnBody",
-        "idx": 0
-      },
-      {
-        "type": "Terminal",
-        "name": "RCurly",
-        "label": "}",
-        "idx": 0,
-        "pattern": "\\}"
-      }
-    ]
-  },
-  {
-    "type": "Rule",
-    "name": "RuleFnArg",
-    "orgText": "",
-    "definition": [
-      {
-        "type": "NonTerminal",
-        "name": "RuleVariableType",
-        "idx": 0
-      },
-      {
-        "type": "Terminal",
-        "name": "Identifier",
-        "label": "Identifier",
-        "idx": 2,
-        "pattern": "[a-zA-z]\\w*"
-      }
-    ]
-  },
-  {
-    "type": "Rule",
-    "name": "RuleFnReturnType",
-    "orgText": "",
-    "definition": [
-      {
-        "type": "Alternation",
-        "idx": 0,
-        "definition": [
-          {
-            "type": "Alternative",
-            "definition": [
-              {
-                "type": "NonTerminal",
-                "name": "RuleVariableType",
-                "idx": 0
-              }
-            ]
-          },
-          {
-            "type": "Alternative",
-            "definition": [
-              {
-                "type": "Terminal",
-                "name": "void",
-                "label": "void",
-                "idx": 0,
-                "pattern": "void"
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "type": "Rule",
-    "name": "RuleFnBody",
-    "orgText": "",
-    "definition": [
-      {
-        "type": "Repetition",
-        "idx": 0,
-        "definition": [
-          {
-            "type": "NonTerminal",
-            "name": "RuleFnStatement",
-            "idx": 0
-          },
-          {
-            "type": "Terminal",
-            "name": "Semicolon",
-            "label": ";",
-            "idx": 0,
-            "pattern": ";"
           }
         ]
       }
